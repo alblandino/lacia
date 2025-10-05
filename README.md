@@ -1,8 +1,10 @@
-# Plataforma SaaS Multitenant - Gestion de Cursos y Estudiantes
+# Multitenant - Gestion de Cursos y Estudiantes
 
 ## Descripcion
 
 Sistema multitenant desarrollado en Laravel para la gestion de cursos y estudiantes de multiples universidades. Cada universidad (tenant) mantiene sus datos completamente aislados mediante un sistema basado en headers HTTP.
+
+> **NOTA IMPORTANTE:** Este proyecto viene configurado con variables de entorno especificas para desarrollo local con Docker. Las credenciales de base de datos estan predefinidas para facilitar la instalacion y pruebas. Estaba pensando usar Azure Vault pero no me iba a poner a perder el tiempo en eso que no es tan importante para la prueba
 
 ## Requisitos del Sistema
 
