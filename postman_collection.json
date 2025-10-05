@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "389fe0ff-a51e-4f6b-be6a-c972217b5141",
+		"name": "Lacia - Multitenant",
+		"description": "API para gestion de cursos y estudiantes multitenant con Laravel, prueba tecnica de Lacia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "257161"
+	},
+	"item": [
+		{
+			"name": "POST /courses/{id}/enroll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Tenant-ID",
+						"value": "{{tenant_id}}",
+						"description": "ID del tenant (1 para UASD, 2 para PUCMM)"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"student_id\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/courses/1/enroll",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"courses",
+						"1",
+						"enroll"
+					]
+				},
+				"description": "Inscribe un estudiante en un curso.\n\n**Request Body:**\n- `student_id` (integer, required): ID del estudiante a inscribir\n\n**Respuestas:**\n- `201 Created`: Inscripcion exitosa\n- `404 Not Found`: Curso o estudiante no encontrado\n- `422 Unprocessable Entity`: Curso inactivo\n- `409 Conflict`: Estudiante ya inscrito\n- `400 Bad Request`: Header X-Tenant-ID faltante o inválido"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /courses/{id}/students",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Tenant-ID",
+						"value": "{{tenant_id}}",
+						"description": "ID del tenant (1 para UASD, 2 para PUCMM)"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/courses/1/students",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"courses",
+						"1",
+						"students"
+					]
+				},
+				"description": "Retorna la lista de estudiantes inscritos en un curso.\n\n**Respuestas:**\n- `200 OK`: Lista de estudiantes\n- `404 Not Found`: Curso no encontrado para el tenant\n- `400 Bad Request`: Header X-Tenant-ID faltante o inválido"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "tenant_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}

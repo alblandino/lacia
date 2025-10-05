@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: lacia_mysql_contaciner
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: lacia
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: lacia
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - lacia_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  lacia_network:
+    driver: bridge
